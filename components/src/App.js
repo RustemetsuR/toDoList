@@ -11,12 +11,53 @@ function App() {
     { toDo: 'Swim', id:'a4'},
     { toDo: 'Code', id:'a5'},
     { toDo: 'Stydy', id:'a6'},
-  ])
+  ]);
+
+  const removeToDo = id =>{
+    const index = tasks.findIndex(td => td.id === id);
+    const tasksCopy = [...tasks];
+    tasksCopy.splice(index,1);
+
+    setTasks(tasksCopy);
+  }
+
+  const addNewTask = () =>{
+    const tasksCopy = [...tasks];
+    const input = document.querySelector('input');
+    const inpValue = input.value;
+    const upperCasedInpVal = inpValue.charAt(0).toUpperCase() + inpValue.slice(1);
+
+    let date = new Date;
+    let day = date.getDay().toString();
+    let year = date.getFullYear();
+    let sec = date.getSeconds();
+    let milSec = date.getMilliseconds();
+    let idDate = day+year+sec+milSec;
+
+    tasksCopy.push({
+      toDo: upperCasedInpVal,
+      id: idDate
+    })
+    console.log(tasksCopy);
+    setTasks(tasksCopy);
+  }
+
+  let tasksList = tasks.map(task =>{
+    return(
+      <Task className="person"
+      key={task.id}
+      toDo={task.toDo}
+      remove={() => removeToDo(task.id)}/>
+    )
+  })
 
   return (
     <div className="App">
-      <input />
-      <button>Add</button>
+     <input type="text" placeholder="To Do"/>
+      <button id="add" type="button" onClick={addNewTask}>Add</button>
+      <div className="toDos-div">
+         {tasksList}
+      </div>
 
     </div>
   );
