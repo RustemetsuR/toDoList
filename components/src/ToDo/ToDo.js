@@ -1,12 +1,12 @@
 import React from 'react';
 
-const ToDo = props => {
+const Task = props => {
     return (
-        <div className="toDo-div">
-            <h3>{props.toDo}</h3>
-            <button type="button">Delete</button>
+        <div className="toDos-item">
+            <h1><i>{props.toDo}</i></h1>
+            <button onClick={props.remove}>Delete</button>
         </div>
     )
 }
 
-export default ToDo;
+export default Task;
