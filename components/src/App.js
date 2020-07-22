@@ -5,23 +5,23 @@ import ToDo from './ToDo/ToDo';
 
 function App() {
   const [tasks, setTasks] = useState([
-    { toDo: 'Buy Milk', id:'a1'},
-    { toDo: 'Drink', id:'a2'},
-    { toDo: 'Play', id:'a3'},
-    { toDo: 'Swim', id:'a4'},
-    { toDo: 'Code', id:'a5'},
-    { toDo: 'Stydy', id:'a6'},
+    { toDo: 'Buy Milk', id: 'a1' },
+    { toDo: 'Drink', id: 'a2' },
+    { toDo: 'Play', id: 'a3' },
+    { toDo: 'Swim', id: 'a4' },
+    { toDo: 'Code', id: 'a5' },
+    { toDo: 'Stydy', id: 'a6' },
   ]);
 
-  const removeToDo = id =>{
+  const removeTasks = id => {
     const index = tasks.findIndex(td => td.id === id);
     const tasksCopy = [...tasks];
-    tasksCopy.splice(index,1);
+    tasksCopy.splice(index, 1);
 
     setTasks(tasksCopy);
   }
 
-  const addNewTask = () =>{
+  const addNewTask = () => {
     const tasksCopy = [...tasks];
     const input = document.querySelector('input');
     const inpValue = input.value;
@@ -32,7 +32,7 @@ function App() {
     let year = date.getFullYear();
     let sec = date.getSeconds();
     let milSec = date.getMilliseconds();
-    let idDate = day+year+sec+milSec;
+    let idDate = day + year + sec + milSec;
 
     tasksCopy.push({
       toDo: upperCasedInpVal,
@@ -42,21 +42,21 @@ function App() {
     setTasks(tasksCopy);
   }
 
-  let tasksList = tasks.map(task =>{
-    return(
+  let tasksList = tasks.map(task => {
+    return (
       <Task className="person"
-      key={task.id}
-      toDo={task.toDo}
-      remove={() => removeToDo(task.id)}/>
+        key={task.id}
+        toDo={task.toDo}
+        remove={() => removeTasks(task.id)} />
     )
   })
 
   return (
     <div className="App">
-     <input type="text" placeholder="To Do"/>
+      <input type="text" placeholder="To Do" />
       <button id="add" type="button" onClick={addNewTask}>Add</button>
       <div className="toDos-div">
-         {tasksList}
+        {tasksList}
       </div>
 
     </div>
